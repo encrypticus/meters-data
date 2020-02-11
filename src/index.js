@@ -15,8 +15,8 @@ const dataService = new DataService();
 
 ReactDom.render(
     <ErrorBoundry>
-      <DataServiceProvider>
-        <App value={dataService}/>
+      <DataServiceProvider value={dataService} >
+        <App/>
       </DataServiceProvider>
     </ErrorBoundry>,
   document.querySelector('.root')

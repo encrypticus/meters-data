@@ -1,6 +1,8 @@
 import React from 'react';
+import withDataService from '$c/hoc';
 
 const DataTable = (props) => {
+  console.log(props);
   return (
     <table className='data-table'>
       <tbody>
@@ -15,4 +17,4 @@ const DataTable = (props) => {
   );
 };
 
-export default DataTable;
+export default withDataService()(DataTable);
