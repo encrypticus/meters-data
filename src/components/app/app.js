@@ -1,10 +1,12 @@
 import React from 'react';
 import Header from '$c/header';
+import DataTable from '$containers/data-table';
 
 const App = () => {
   return (
     <main role="main" className="container">
-      <Header numItems={5} total={210}/>
+      <Header/>
+      <DataTable/>
     </main>
   );
 };

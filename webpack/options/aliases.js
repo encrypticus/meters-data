@@ -4,6 +4,7 @@ module.exports = () => {
       alias: {
         '$': require('path').resolve('./src'),
         '$c': require('path').resolve('./src/components'),
+        '$containers': require('path').resolve('./src/containers'),
         '$p': require('path').resolve('./src/pages'),
         '$redux': require('path').resolve('./src/redux'),
         '$reducers': require('path').resolve('./src/redux/reducers'),
