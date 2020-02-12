@@ -16,17 +16,7 @@ class DataTableContainer extends React.Component {
       emmitError
     } = this.props;
 
-    dataService.getMetersData()
-      .then(response => {
-        let data = [];
-
-        for (const key in response) {
-          response[key].id = key;
-          data.push(response[key]);
-        }
-
-        return data;
-      })
+    dataService.getData()
       .then((data) => {
         dataLoaded(data);
       })
