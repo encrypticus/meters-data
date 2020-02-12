@@ -26,4 +26,16 @@ export default class DataService {
     const data = await this.getResource();
     return this._transformData(data);
   };
+
+  deleteRow = async (id) => {
+    const result = await fetch(`https://data-meters.firebaseio.com/data/${id}.json`, {
+      method: 'DELETE'
+    });
+
+    if (!result.ok) {
+      throw new Error('Не удалось удалить запись');
+    }
+
+    return await result.json();
+  };
 }

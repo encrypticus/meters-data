@@ -17,7 +17,9 @@ const TableRow = (props) => {
       <td>{value}</td>
       <td>{date}</td>
       <td>
-        <button className="btn btn-success">
+        <button
+          onClick={() => console.log(id)}
+          className="btn btn-success">
           <span className="fa fa-trash"></span>
         </button>
       </td>
