@@ -1,6 +1,7 @@
 import React from 'react';
 import TableRow from '$c/table-row';
 import PropTypes from 'prop-types';
+import './data-table.scss';
 
 const DataTable = (props) => {
   const { data, deleteRow, changeValue } = props;
@@ -32,9 +33,11 @@ const DataTable = (props) => {
     });
   };
 
-  const message = <tr>
-    <td>Нет показаний</td>
-  </tr>;
+  const message = (
+    <tr>
+      <td>Нет показаний</td>
+    </tr>
+  );
 
   return (
     <table className="data-table table table-bordered">
