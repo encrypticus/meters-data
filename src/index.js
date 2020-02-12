@@ -6,6 +6,7 @@ import ErrorBoundry from '$c/error-boundry';
 import DataService from './services/dataService';
 import {DataServiceProvider} from '$c/data-service-context';
 import store from '$store';
+import './index.scss';
 
 
 import 'bootstrap/scss/bootstrap.scss';

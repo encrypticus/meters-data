@@ -3,5 +3,23 @@
   th,
   td {
     text-align: center;
+    vertical-align: middle !important;
+
+    @media (max-width: 480px) {
+      padding: 10px !important;
+      font-weight: bold;
+    }
+  }
+
+  th {
+    @media (max-width: 480px) {
+      font-size: 10px;
+    }
+  }
+
+  td {
+    @media (max-width: 480px) {
+      font-size: 12px;
+    }
   }
 }
