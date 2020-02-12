@@ -3,26 +3,16 @@ import {connect} from 'react-redux';
 import {compose} from '$utils';
 import withDataService from '$c/hoc';
 import DataTable from '$c/data-table';
-import {dataLoaded, dataRequested, emmitError} from '$actions';
+import {fetchMetersData} from '$actions';
 import Spinner from '$c/spinner';
 import ErrorIndicator from '$c/error-indicator';
 
 class DataTableContainer extends React.Component {
 
   componentDidMount() {
-    const {
-      dataService,
-      dataLoaded,
-      emmitError
-    } = this.props;
+    const { fetchMetersData } = this.props;
 
-    dataService.getMetersData()
-      .then((data) => {
-        dataLoaded(data);
-      })
-      .catch(() => {
-        emmitError();
-      });
+    fetchMetersData();
   }
 
   render() {
@@ -53,11 +43,13 @@ function mapStateToProps(state) {
   };
 }
 
-const mapDispatchToProps = {
-    dataLoaded,
-    dataRequested,
-    emmitError
-};
+function mapDispatchToProps(dispatch, ownProps) {
+  const { dataService } = ownProps;
+
+  return {
+    fetchMetersData: fetchMetersData(dispatch, dataService)
+  }
+}
 
 export default compose(
   withDataService(),

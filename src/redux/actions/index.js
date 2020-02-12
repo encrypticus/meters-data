@@ -17,8 +17,14 @@ const emmitError = () => {
   };
 };
 
+const fetchMetersData = (dispatch, dataService) => () => {
+  dispatch(dataRequested());
+
+  dataService.getMetersData()
+    .then(data => dispatch(dataLoaded(data)))
+    .catch(() => dispatch(emmitError()));
+};
+
 export {
-  dataLoaded,
-  dataRequested,
-  emmitError
+  fetchMetersData
 };
