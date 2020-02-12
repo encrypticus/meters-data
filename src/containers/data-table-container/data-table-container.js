@@ -30,7 +30,9 @@ class DataTableContainer extends React.Component {
   deleteRow = (id) => {
     const { deleteRow } = this.props;
 
-    deleteRow(id);
+    const flag = confirm('Действительно удалить строку?');
+
+    if (flag) deleteRow(id);
   };
 
   changeValue = (id, value) => {
