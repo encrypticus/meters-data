@@ -15,8 +15,12 @@ export default class DataService {
     const transformedData = [];
 
     for (const key in data) {
-      data[key].id = key;
-      transformedData.push(data[key]);
+
+      data[key].map((elt, index) => {
+        elt.id = `${key}/${index}`;
+        transformedData.push(elt);
+      });
+
     }
 
     return transformedData;
