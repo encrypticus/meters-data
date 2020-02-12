@@ -20,11 +20,7 @@ class DataTableContainer extends React.Component {
     const {
       data,
       isLoading,
-      hasError,
-      dataLoaded,
-      dataRequested,
-      emmitError,
-      dataService
+      hasError
     } = this.props;
 
     if (isLoading && !hasError) return <Spinner/>;
