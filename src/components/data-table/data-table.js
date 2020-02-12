@@ -31,18 +31,23 @@ const DataTable = (props) => {
     });
   };
 
-  const message = <tr><td>Нет показаний</td></tr>;
+  const message = <tr>
+    <td>Нет показаний</td>
+  </tr>;
 
   return (
-    <table className='data-table table'>
-      <tbody>
+    <table className="data-table table table-bordered">
+      <thead className="thead-light">
       <tr>
         <th>Номер ТП</th>
         <th>Номер счетчика</th>
         <th>Показания</th>
         <th>Дата</th>
+        <th>Удалить</th>
       </tr>
-      { data.length ? renderRows(data) : message}
+      </thead>
+      <tbody>
+      {data.length ? renderRows(data) : message}
       </tbody>
     </table>
   );
