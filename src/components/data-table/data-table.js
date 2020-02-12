@@ -3,10 +3,9 @@ import TableRow from '$c/table-row';
 import PropTypes from 'prop-types';
 
 const DataTable = (props) => {
-  const { data } = props;
+  const { data, deleteRow } = props;
 
   const renderRows = (data) => {
-
     return data.map(row => {
 
       const {
@@ -25,11 +24,14 @@ const DataTable = (props) => {
           value={value}
           date={date}
           id={id}
+          deleteRow={deleteRow}
         />
       );
 
     });
   };
+
+  const message = <tr><td>Нет показаний</td></tr>;
 
   return (
     <table className='data-table table'>
@@ -40,14 +42,15 @@ const DataTable = (props) => {
         <th>Показания</th>
         <th>Дата</th>
       </tr>
-      {renderRows(data)}
+      { data.length ? renderRows(data) : message}
       </tbody>
     </table>
   );
 };
 
 DataTable.propTypes = {
-  data: PropTypes.array.isRequired
+  data: PropTypes.array.isRequired,
+  deleteRow: PropTypes.func.isRequired
 };
 
 export default DataTable;

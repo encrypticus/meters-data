@@ -7,7 +7,8 @@ const TableRow = (props) => {
     countNumber,
     value,
     date,
-    id
+    id,
+    deleteRow
   } = props;
 
   return (
@@ -18,7 +19,7 @@ const TableRow = (props) => {
       <td>{date}</td>
       <td>
         <button
-          onClick={() => console.log(id)}
+          onClick={() => deleteRow(id)}
           className="btn btn-success">
           <span className="fa fa-trash"></span>
         </button>
@@ -32,7 +33,8 @@ TableRow.propTypes = {
   countNumber: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired
+  id: PropTypes.string.isRequired,
+  deleteRow: PropTypes.func.isRequired
 };
 
 export default TableRow;

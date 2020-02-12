@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {compose} from '$utils';
 import withDataService from '$c/hoc';
 import DataTable from '$c/data-table';
-import {fetchMetersData} from '$actions';
+import {fetchMetersData, deleteRow } from '$actions';
 import Spinner from '$c/spinner';
 import ErrorIndicator from '$c/error-indicator';
 import PropTypes from 'prop-types';
@@ -16,7 +16,8 @@ class DataTableContainer extends React.Component {
     isLoading: PropTypes.bool.isRequired,
     hasError: PropTypes.bool.isRequired,
     fetchMetersData: PropTypes.func.isRequired,
-    dataService: PropTypes.instanceOf(DataService)
+    dataService: PropTypes.instanceOf(DataService),
+    deleteRow: PropTypes.func.isRequired
   };
 
   componentDidMount() {
@@ -24,6 +25,12 @@ class DataTableContainer extends React.Component {
 
     fetchMetersData();
   }
+
+  deleteRow = (id) => {
+    const { deleteRow } = this.props;
+
+    deleteRow(id);
+  };
 
   render() {
 
@@ -37,7 +44,7 @@ class DataTableContainer extends React.Component {
 
     if (hasError) return <ErrorIndicator/>;
 
-    return <DataTable data={data}/>;
+    return <DataTable data={data} deleteRow={this.deleteRow}/>;
   }
 }
 
@@ -53,8 +60,9 @@ function mapDispatchToProps(dispatch, ownProps) {
   const { dataService } = ownProps;
 
   return {
-    fetchMetersData: fetchMetersData(dispatch, dataService)
-  }
+    fetchMetersData: fetchMetersData(dispatch, dataService),
+    deleteRow: deleteRow(dispatch, dataService)
+  };
 }
 
 export default compose(
