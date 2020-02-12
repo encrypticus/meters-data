@@ -16,7 +16,7 @@ class DataTableContainer extends React.Component {
       emmitError
     } = this.props;
 
-    dataService.getData()
+    dataService.getMetersData()
       .then((data) => {
         dataLoaded(data);
       })
@@ -53,13 +53,11 @@ function mapStateToProps(state) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dataLoaded: (data) => dispatch(dataLoaded(data)),
-    dataRequested: () => dispatch(dataRequested()),
-    emmitError: () => dispatch(emmitError())
-  };
-}
+const mapDispatchToProps = {
+    dataLoaded,
+    dataRequested,
+    emmitError
+};
 
 export default compose(
   withDataService(),

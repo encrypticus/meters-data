@@ -22,7 +22,7 @@ export default class DataService {
     return transformedData;
   };
 
-  getData = async () => {
+  getMetersData = async () => {
     const data = await this.getResource();
     return this._transformData(data);
   };
