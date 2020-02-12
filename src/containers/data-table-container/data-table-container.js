@@ -6,8 +6,18 @@ import DataTable from '$c/data-table';
 import {fetchMetersData} from '$actions';
 import Spinner from '$c/spinner';
 import ErrorIndicator from '$c/error-indicator';
+import PropTypes from 'prop-types';
+import DataService from '../../services/dataService';
 
 class DataTableContainer extends React.Component {
+
+  static propTypes = {
+    data: PropTypes.array.isRequired,
+    isLoading: PropTypes.bool.isRequired,
+    hasError: PropTypes.bool.isRequired,
+    fetchMetersData: PropTypes.func.isRequired,
+    dataService: PropTypes.instanceOf(DataService)
+  };
 
   componentDidMount() {
     const { fetchMetersData } = this.props;
