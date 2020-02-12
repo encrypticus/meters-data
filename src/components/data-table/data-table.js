@@ -1,5 +1,6 @@
 import React from 'react';
 import TableRow from '$c/table-row';
+import PropTypes from 'prop-types';
 
 const DataTable = (props) => {
   const { data } = props;
@@ -43,6 +44,10 @@ const DataTable = (props) => {
       </tbody>
     </table>
   );
+};
+
+DataTable.propTypes = {
+  data: PropTypes.array.isRequired
 };
 
 export default DataTable;
