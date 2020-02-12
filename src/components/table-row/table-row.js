@@ -1,7 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const TableRow = (props) => {
-
   const {
     tpNumber,
     countNumber,
@@ -25,6 +25,14 @@ const TableRow = (props) => {
       </td>
     </tr>
   );
+};
+
+TableRow.propTypes = {
+  tpNumber: PropTypes.number.isRequired,
+  countNumber: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired
 };
 
 export default TableRow;
