@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './table-row.scss';
 
 const TableRow = (props) => {
   const {
@@ -8,14 +9,27 @@ const TableRow = (props) => {
     value,
     date,
     id,
-    deleteRow
+    deleteRow,
+    changeValue
   } = props;
+
+  const changeCurrentValue = () => {
+    let value = prompt('Ввести значение');
+
+    if (!value) return;
+
+    value = value.trim();
+
+    if (value === '') return;
+
+    changeValue(id, value);
+  };
 
   return (
     <tr>
       <td>{tpNumber}</td>
       <td>{countNumber}</td>
-      <td>{value}</td>
+      <td className="value-col" onClick={changeCurrentValue}>{value}</td>
       <td>{date}</td>
       <td>
         <button
@@ -34,7 +48,8 @@ TableRow.propTypes = {
   value: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
-  deleteRow: PropTypes.func.isRequired
+  deleteRow: PropTypes.func.isRequired,
+  changeValue: PropTypes.func.isRequired
 };
 
 export default TableRow;

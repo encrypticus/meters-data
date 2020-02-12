@@ -37,7 +37,20 @@ const deleteRow = (dispatch, dataService) => (id) => {
     .catch(() => dispatch(emmitError()));
 };
 
+const changeValue = (dispatch, dataService) => (id, value) => {
+  dispatch(dataRequested());
+
+  dataService.changeValue(id, value)
+    .then(() => {
+      dataService.getMetersData()
+        .then(data => dispatch(dataLoaded(data)))
+        .catch(() => dispatch(emmitError()));
+    })
+    .catch(() => dispatch(emmitError()));
+};
+
 export {
   fetchMetersData,
-  deleteRow
+  deleteRow,
+  changeValue
 };

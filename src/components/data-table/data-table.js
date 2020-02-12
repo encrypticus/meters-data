@@ -3,7 +3,7 @@ import TableRow from '$c/table-row';
 import PropTypes from 'prop-types';
 
 const DataTable = (props) => {
-  const { data, deleteRow } = props;
+  const { data, deleteRow, changeValue } = props;
 
   const renderRows = (data) => {
     return data.map(row => {
@@ -25,6 +25,7 @@ const DataTable = (props) => {
           date={date}
           id={id}
           deleteRow={deleteRow}
+          changeValue={changeValue}
         />
       );
 
@@ -55,7 +56,8 @@ const DataTable = (props) => {
 
 DataTable.propTypes = {
   data: PropTypes.array.isRequired,
-  deleteRow: PropTypes.func.isRequired
+  deleteRow: PropTypes.func.isRequired,
+  changeValue: PropTypes.func.isRequired
 };
 
 export default DataTable;

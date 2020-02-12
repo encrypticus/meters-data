@@ -38,4 +38,20 @@ export default class DataService {
 
     return await result.json();
   };
+
+  changeValue = async (id, value) => {
+    const result = await fetch(`https://data-meters.firebaseio.com/data/${id}.json`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify({ value })
+    });
+
+    if (!result.ok) {
+      throw new Error('Не удалось перезаписать значение');
+    }
+
+    return result.json();
+  }
 }

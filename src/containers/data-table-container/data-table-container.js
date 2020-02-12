@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {compose} from '$utils';
 import withDataService from '$c/hoc';
 import DataTable from '$c/data-table';
-import {fetchMetersData, deleteRow } from '$actions';
+import {fetchMetersData, deleteRow, changeValue } from '$actions';
 import Spinner from '$c/spinner';
 import ErrorIndicator from '$c/error-indicator';
 import PropTypes from 'prop-types';
@@ -17,7 +17,8 @@ class DataTableContainer extends React.Component {
     hasError: PropTypes.bool.isRequired,
     fetchMetersData: PropTypes.func.isRequired,
     dataService: PropTypes.instanceOf(DataService),
-    deleteRow: PropTypes.func.isRequired
+    deleteRow: PropTypes.func.isRequired,
+    changeValue: PropTypes.func.isRequired
   };
 
   componentDidMount() {
@@ -32,6 +33,12 @@ class DataTableContainer extends React.Component {
     deleteRow(id);
   };
 
+  changeValue = (id, value) => {
+    const { changeValue } = this.props;
+
+    changeValue(id, value);
+  };
+
   render() {
 
     const {
@@ -44,7 +51,13 @@ class DataTableContainer extends React.Component {
 
     if (hasError) return <ErrorIndicator/>;
 
-    return <DataTable data={data} deleteRow={this.deleteRow}/>;
+    return (
+      <DataTable
+        data={data}
+        deleteRow={this.deleteRow}
+        changeValue={this.changeValue}
+      />
+    );
   }
 }
 
@@ -61,7 +74,8 @@ function mapDispatchToProps(dispatch, ownProps) {
 
   return {
     fetchMetersData: fetchMetersData(dispatch, dataService),
-    deleteRow: deleteRow(dispatch, dataService)
+    deleteRow: deleteRow(dispatch, dataService),
+    changeValue: changeValue(dispatch, dataService)
   };
 }
 
