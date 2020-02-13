@@ -58,4 +58,20 @@ export default class DataService {
 
     return result.json();
   }
+
+  addStation = async (request, url = this._url) => {
+    const result = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify(request)
+    });
+
+    if (!result.ok) {
+      throw new Error(`Не удается найти адрес ${url}`);
+    }
+
+    return await result.json();
+  }
 }
