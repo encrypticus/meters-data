@@ -49,8 +49,21 @@ const changeValue = (dispatch, dataService) => (id, value) => {
     .catch(() => dispatch(emmitError()));
 };
 
+const addStation = (dispatch, dataService) => (requestBody) => {
+  dispatch(dataRequested());
+
+  dataService.addStation(requestBody)
+    .then(() => {
+      dataService.getMetersData()
+        .then(data => dispatch(dataLoaded(data)))
+        .catch(() => dispatch(emmitError()));
+    })
+    .catch(() => dispatch(emmitError()));
+};
+
 export {
   fetchMetersData,
   deleteRow,
-  changeValue
+  changeValue,
+  addStation
 };

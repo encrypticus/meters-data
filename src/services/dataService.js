@@ -16,9 +16,22 @@ export default class DataService {
 
     for (const key in data) {
 
+      let id = null;
+
+      if (!Array.isArray(data[key])) {
+
+        for (const idx in data[key]) {
+          id = idx;
+        }
+
+        data[key] = Object.values(data[key]);
+      }
+
       data[key].map((elt, index) => {
-        elt.id = `${key}/${index}`;
-        transformedData.push(elt);
+        if (elt) {
+          elt.id = id ? `${key}/${id}` : `${key}/${index}`;
+          transformedData.push(elt);
+        }
       });
 
     }
@@ -57,7 +70,7 @@ export default class DataService {
     }
 
     return result.json();
-  }
+  };
 
   addStation = async (request, url = this._url) => {
     const result = await fetch(url, {
@@ -73,5 +86,5 @@ export default class DataService {
     }
 
     return await result.json();
-  }
+  };
 }
