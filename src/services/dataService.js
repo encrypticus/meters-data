@@ -16,12 +16,12 @@ export default class DataService {
 
     for (const key in data) {
 
-      let id = null;
+      let ids = [];
 
       if (!Array.isArray(data[key])) {
 
-        for (const idx in data[key]) {
-          id = idx;
+        for (const id in data[key]) {
+          ids.push(id);
         }
 
         data[key] = Object.values(data[key]);
@@ -29,7 +29,7 @@ export default class DataService {
 
       data[key].map((elt, index) => {
         if (elt) {
-          elt.id = id ? `${key}/${id}` : `${key}/${index}`;
+          elt.id = ids.length > 0 ? `${key}/${ids[index]}` : `${key}/${index}`;
           transformedData.push(elt);
         }
       });
