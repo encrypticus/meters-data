@@ -35,7 +35,7 @@ const DataTable = (props) => {
 
   const message = (
     <tr>
-      <td>Нет показаний</td>
+      <td colSpan="5">Нет показаний</td>
     </tr>
   );
 
