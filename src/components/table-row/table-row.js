@@ -43,7 +43,7 @@ const TableRow = (props) => {
 };
 
 TableRow.propTypes = {
-  tpNumber: PropTypes.number.isRequired,
+  tpNumber: PropTypes.string.isRequired,
   countNumber: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
