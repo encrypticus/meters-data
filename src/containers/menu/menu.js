@@ -14,10 +14,10 @@ class MenuContainer extends React.Component {
 
   static propTypes = {
     addStation: PropTypes.func.isRequired,
-    dataService: PropTypes.instanceOf(DataService)
+    dataService: PropTypes.instanceOf(DataService),
+    tpNumbers: PropTypes.array.isRequired,
+    countNumbers: PropTypes.object.isRequired
   };
-
-  tpNumbers = ['309', '310', '311', '312', '313', '314'];
 
   createRequestBody = (tpNumber, countNumbers) => {
     let body = [];
@@ -35,36 +35,40 @@ class MenuContainer extends React.Component {
   };
 
   onChangeValue = (num) => {
-    const { addStation } = this.props;
+    const {
+      addStation,
+      countNumbers: { tp309, tp310, tp311, tp312, tp313, tp314 }
+    } = this.props;
+
     let body;
 
     switch (num) {
       case '309':
-        body = this.createRequestBody(num, ['100964', '160000']);
+        body = this.createRequestBody(num, tp309);
         break;
 
       case '310':
-        body = this.createRequestBody(num, ['215110', '995258', '19250', '114489']);
+        body = this.createRequestBody(num, tp310);
         break;
 
       case '311':
-        body = this.createRequestBody(num, ['215933', '516465']);
+        body = this.createRequestBody(num, tp311);
         break;
 
       case '312':
-        body = this.createRequestBody(num, ['820943', '835057']);
+        body = this.createRequestBody(num, tp312);
         break;
 
       case '313':
-        body = this.createRequestBody(num, ['20297549']);
+        body = this.createRequestBody(num, tp313);
         break;
 
       case '314':
-        body = this.createRequestBody(num, ['20309187']);
+        body = this.createRequestBody(num, tp314);
         break;
 
       default:
-        body = this.createRequestBody('309', ['100964', '160000']);
+        body = this.createRequestBody('309', tp309);
     }
 
     addStation(body);
@@ -96,14 +100,23 @@ class MenuContainer extends React.Component {
   }
 
   render() {
+    const { tpNumbers } = this.props;
+
     return (
       <Menu
         onChangeValue={this.onChangeValue}
-        tpNumbers={this.tpNumbers}
+        tpNumbers={tpNumbers}
       />
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    tpNumbers: state.tpNumbers,
+    countNumbers: state.countNumbers
+  };
+};
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   const { dataService } = ownProps;
@@ -115,5 +128,5 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
 export default compose(
   withDataService(),
-  connect(null, mapDispatchToProps)
+  connect(mapStateToProps, mapDispatchToProps)
 )(MenuContainer);
