@@ -2,4 +2,9 @@ html, body {
   background-image: url(./email-pattern.png);
   background-repeat: repeat;
   background-attachment: fixed;
+  font-family: Lora, Arial, serif !important;
+}
+
+.root {
+  min-width: 360px;
 }

@@ -34,7 +34,7 @@ const TableRow = (props) => {
       <td>
         <button
           onClick={() => deleteRow(id)}
-          className="btn btn-success">
+          className="btn btn-outline-info">
           <span className="fa fa-trash"></span>
         </button>
       </td>

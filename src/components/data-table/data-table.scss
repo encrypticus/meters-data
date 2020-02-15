@@ -1,10 +1,11 @@
 .data-table {
+  background-color: rgba(255, 255, 255, .5);
 
   th,
   td {
     text-align: center;
     vertical-align: middle !important;
-    border-color: #8564045c !important;
+    border-color: rgba(137, 137, 137, 0.36) !important;
 
     @media (max-width: 480px) {
       padding: 10px !important;

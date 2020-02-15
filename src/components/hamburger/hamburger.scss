@@ -1,0 +1,16 @@
+@import "~hamburgers/_sass/hamburgers/hamburgers";
+
+$transition-time: .3s;
+
+.hamburger {
+  transition-duration: $transition-time;
+}
+
+.hamburger-inner {
+
+  &,
+  &::before,
+  &::after {
+    transition-duration: $transition-time;
+  }
+}
