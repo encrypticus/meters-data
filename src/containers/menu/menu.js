@@ -79,7 +79,7 @@ class MenuContainer extends React.Component {
     this.menuDomElement = document.getElementById('mmenu');
 
     const mmenu = new Mmenu(this.menuDomElement, {
-      extensions: ['position-right', 'theme-dark'],
+      extensions: ['position-right', 'theme-dark', 'pagedim-black'],
       navbar: {
         title: '<span>Меню</span>',
       },
