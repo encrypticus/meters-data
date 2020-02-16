@@ -1,5 +1,5 @@
 {
-  "name": "react/redux SPA",
+  "name": "meters-data",
   "version": "1.0.0",
   "description": "React/redux SPA приложение 'Показание электросчетчиков' с firebase в качестве хранилища данных",
   "main": "index.js",
