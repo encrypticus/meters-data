@@ -1,7 +1,7 @@
 {
-  "name": "webpack-starter-kit",
+  "name": "react/redux SPA",
   "version": "1.0.0",
-  "description": "Стартовый репозиторий для frontend-разработки c webpack на борту",
+  "description": "React/redux SPA приложение 'Показание электросчетчиков' с firebase в качестве хранилища данных",
   "main": "index.js",
   "scripts": {
     "browser-sync": "cross-env mode=development webpack --mode development --watch",
@@ -11,21 +11,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/encrypticus/webpack-starter-kit.git"
+    "url": "git+https://github.com/encrypticus/meters-data.git"
   },
   "keywords": [
-    "webpack",
-    "webpack boilerplate",
-    "webpack starter kit",
-    "frontend starter kit",
-    "frontend boilerplate"
+    "react",
+    "redux",
+    "SPA",
+    "firebase"
   ],
   "author": "Alexander Timofeev aka encrypticus",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/encrypticus/webpack-starter-kit/issues"
+    "url": "https://github.com/encrypticus/meters-data/issues"
   },
-  "homepage": "https://github.com/encrypticus/webpack-starter-kit#readme",
+  "homepage": "https://github.com/encrypticus/meters-data#readme",
   "browserslist": [
     "last 2 chrome versions",
     "last 2 firefox versions",
