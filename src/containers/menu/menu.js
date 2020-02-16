@@ -113,8 +113,8 @@ class MenuContainer extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    tpNumbers: state.tpNumbers,
-    countNumbers: state.countNumbers
+    tpNumbers: state.stations.tpNumbers,
+    countNumbers: state.stations.countNumbers
   };
 };
 

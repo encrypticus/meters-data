@@ -65,9 +65,9 @@ class DataTableContainer extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    isLoading: state.isLoading,
-    hasError: state.hasError,
-    data: state.data
+    isLoading: state.metersData.isLoading,
+    hasError: state.metersData.hasError,
+    data: state.metersData.data
   };
 }
 
