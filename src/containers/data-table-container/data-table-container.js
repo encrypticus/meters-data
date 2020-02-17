@@ -8,7 +8,7 @@ import Spinner from '$c/spinner';
 import ErrorIndicator from '$c/error-indicator';
 import PropTypes from 'prop-types';
 import DataService from '../../services/dataService';
-import ModalWindow from '$c/modal-windows/confirm-window';
+import ConfirmWindow from '$c/modal-windows/confirm-window';
 
 class DataTableContainer extends React.Component {
 
@@ -59,8 +59,7 @@ class DataTableContainer extends React.Component {
     const {
       data,
       isLoading,
-      hasError,
-      isConfirmShow
+      hasError
     } = this.props;
 
     if (isLoading && !hasError) return <Spinner/>;
@@ -74,9 +73,7 @@ class DataTableContainer extends React.Component {
           changeValue={this.changeValue}
           saveRecordID={this.saveRecordID}
         />
-        <ModalWindow
-          isConfirmShow={isConfirmShow}
-          hideConfirm={this.hideConfirm}
+        <ConfirmWindow
           deleteRow={this.deleteRow}
         />
       </>
@@ -89,7 +86,6 @@ function mapStateToProps(state) {
     isLoading: state.metersData.isLoading,
     hasError: state.metersData.hasError,
     data: state.metersData.data,
-    isConfirmShow: state.modal.isConfirmShow,
     recordID: state.modal.recordID
   };
 }

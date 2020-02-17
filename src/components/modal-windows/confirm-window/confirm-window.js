@@ -1,29 +1,59 @@
 import React from 'react';
 import {Modal} from 'react-bootstrap';
 import {Button} from 'react-bootstrap';
+import {showConfirm} from '$actions';
+import {connect} from 'react-redux';
 import './confirm-window.scss';
 
-const ConfirmWindow = (props) => {
-  const { isConfirmShow, hideConfirm, deleteRow } = props;
+class ConfirmWindow extends React.Component {
 
-  return (
-    <Modal show={isConfirmShow} onHide={() => hideConfirm()}>
-      <Modal.Header closeButton>
-        <Modal.Title>
-          <p className="modal-heading">Внимание!</p>
-        </Modal.Title>
-      </Modal.Header>
+  hideConfirm = () => {
+    const { showConfirm } = this.props;
+    showConfirm(false);
+  };
 
-      <Modal.Body>
-        <p>Удалить запись?</p>
-      </Modal.Body>
+  deleteRow = () => {
+    const { deleteRow } = this.props;
+    deleteRow();
+  };
 
-      <Modal.Footer>
-        <Button variant="outline-success" onClick={() => hideConfirm()}>Отменить</Button>
-        <Button variant="outline-danger" onClick={() => deleteRow()}>Удалить</Button>
-      </Modal.Footer>
-    </Modal>
-  );
+  render() {
+    const { isConfirmShow } = this.props;
+
+    return (
+      <Modal show={isConfirmShow} onHide={() => this.hideConfirm()}>
+        <Modal.Header closeButton>
+          <Modal.Title>
+            <p className="modal-heading">Внимание!</p>
+          </Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          <p>Удалить запись?</p>
+        </Modal.Body>
+
+        <Modal.Footer>
+          <Button variant="outline-success" onClick={() => this.hideConfirm()}>Отменить</Button>
+          <Button variant="outline-danger" onClick={() => this.deleteRow()}>Удалить</Button>
+        </Modal.Footer>
+      </Modal>
+    );
+  }
+
 };
 
-export default ConfirmWindow;
+function mapStateToProps(state) {
+  return {
+    isConfirmShow: state.modal.isConfirmShow
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+
+  return {
+    showConfirm: (show) => dispatch(showConfirm(show))
+  };
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(ConfirmWindow);
