@@ -9,7 +9,7 @@ const TableRow = (props) => {
     value,
     date,
     id,
-    deleteRow,
+    saveRecordID,
     changeValue
   } = props;
 
@@ -33,7 +33,7 @@ const TableRow = (props) => {
       <td>{date}</td>
       <td>
         <button
-          onClick={() => deleteRow(id)}
+          onClick={() => saveRecordID(id)}
           className="btn btn-outline-info">
           <span className="fa fa-trash"></span>
         </button>
@@ -48,7 +48,7 @@ TableRow.propTypes = {
   value: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
-  deleteRow: PropTypes.func.isRequired,
+  saveRecordID: PropTypes.func.isRequired,
   changeValue: PropTypes.func.isRequired
 };
 
