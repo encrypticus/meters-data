@@ -17,6 +17,20 @@ const emmitError = () => {
   };
 };
 
+const showConfirm = (show) => {
+  return {
+    type: 'SHOW_CONFIRM',
+    payload: show
+  };
+};
+
+const saveRecordID = (recordID) => {
+  return {
+    type: 'SAVE_RECORD_ID',
+    payload: recordID
+  };
+};
+
 const fetchMetersData = (dispatch, dataService) => () => {
   dispatch(dataRequested());
 
@@ -65,5 +79,7 @@ export {
   fetchMetersData,
   deleteRow,
   changeValue,
-  addStation
+  addStation,
+  showConfirm,
+  saveRecordID
 };
