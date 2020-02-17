@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import './data-table.scss';
 
 const DataTable = (props) => {
-  const { data, deleteRow, changeValue } = props;
+  const { data, changeValue, saveRecordID } = props;
 
   const renderRows = (data) => {
     return data.map(row => {
@@ -25,7 +25,7 @@ const DataTable = (props) => {
           value={value}
           date={date}
           id={id}
-          deleteRow={deleteRow}
+          saveRecordID={saveRecordID}
           changeValue={changeValue}
         />
       );
@@ -59,7 +59,7 @@ const DataTable = (props) => {
 
 DataTable.propTypes = {
   data: PropTypes.array.isRequired,
-  deleteRow: PropTypes.func.isRequired,
+  saveRecordID: PropTypes.func.isRequired,
   changeValue: PropTypes.func.isRequired
 };
 
