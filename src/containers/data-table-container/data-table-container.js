@@ -3,11 +3,12 @@ import {connect} from 'react-redux';
 import {compose} from '$utils';
 import withDataService from '$c/hoc';
 import DataTable from '$c/data-table';
-import {fetchMetersData, deleteRow, changeValue } from '$actions';
+import {fetchMetersData, deleteRow, changeValue, showConfirm, saveRecordID} from '$actions';
 import Spinner from '$c/spinner';
 import ErrorIndicator from '$c/error-indicator';
 import PropTypes from 'prop-types';
 import DataService from '../../services/dataService';
+import ModalWindow from '$c/modal-windows/confirm-window';
 
 class DataTableContainer extends React.Component {
 
@@ -27,12 +28,24 @@ class DataTableContainer extends React.Component {
     fetchMetersData();
   }
 
-  deleteRow = (id) => {
-    const { deleteRow } = this.props;
+  hideConfirm = () => {
+    const { showConfirm } = this.props;
 
-    const flag = confirm('Действительно удалить строку?');
+    showConfirm(false);
+  };
 
-    if (flag) deleteRow(id);
+  saveRecordID = (recordID) => {
+    const { saveRecordID, showConfirm } = this.props;
+
+    saveRecordID(recordID);
+    showConfirm(true);
+  };
+
+  deleteRow = () => {
+    const { deleteRow, recordID } = this.props;
+
+    this.hideConfirm();
+    deleteRow(recordID);
   };
 
   changeValue = (id, value) => {
@@ -46,7 +59,8 @@ class DataTableContainer extends React.Component {
     const {
       data,
       isLoading,
-      hasError
+      hasError,
+      isConfirmShow
     } = this.props;
 
     if (isLoading && !hasError) return <Spinner/>;
@@ -54,11 +68,18 @@ class DataTableContainer extends React.Component {
     if (hasError) return <ErrorIndicator/>;
 
     return (
-      <DataTable
-        data={data}
-        deleteRow={this.deleteRow}
-        changeValue={this.changeValue}
-      />
+      <>
+        <DataTable
+          data={data}
+          changeValue={this.changeValue}
+          saveRecordID={this.saveRecordID}
+        />
+        <ModalWindow
+          isConfirmShow={isConfirmShow}
+          hideConfirm={this.hideConfirm}
+          deleteRow={this.deleteRow}
+        />
+      </>
     );
   }
 }
@@ -67,7 +88,9 @@ function mapStateToProps(state) {
   return {
     isLoading: state.metersData.isLoading,
     hasError: state.metersData.hasError,
-    data: state.metersData.data
+    data: state.metersData.data,
+    isConfirmShow: state.modal.isConfirmShow,
+    recordID: state.modal.recordID
   };
 }
 
@@ -77,7 +100,9 @@ function mapDispatchToProps(dispatch, ownProps) {
   return {
     fetchMetersData: fetchMetersData(dispatch, dataService),
     deleteRow: deleteRow(dispatch, dataService),
-    changeValue: changeValue(dispatch, dataService)
+    changeValue: changeValue(dispatch, dataService),
+    showConfirm: (show) => dispatch(showConfirm(show)),
+    saveRecordID: (recordID) => dispatch(saveRecordID(recordID))
   };
 }
 
