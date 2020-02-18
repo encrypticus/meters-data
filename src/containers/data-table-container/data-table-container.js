@@ -19,7 +19,10 @@ class DataTableContainer extends React.Component {
     fetchMetersData: PropTypes.func.isRequired,
     dataService: PropTypes.instanceOf(DataService),
     deleteRow: PropTypes.func.isRequired,
-    changeValue: PropTypes.func.isRequired
+    changeValue: PropTypes.func.isRequired,
+    recordID: PropTypes.string.isRequired,
+    saveRecordID: PropTypes.func.isRequired,
+    showConfirm: PropTypes.func.isRequired
   };
 
   componentDidMount() {
