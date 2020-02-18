@@ -3,9 +3,16 @@ import {Modal} from 'react-bootstrap';
 import {Button} from 'react-bootstrap';
 import {showConfirm} from '$actions';
 import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 import './confirm-window.scss';
 
 class ConfirmWindow extends React.Component {
+
+  static propTypes = {
+    showConfirm: PropTypes.func.isRequired,
+    deleteRow: PropTypes.func.isRequired,
+    isConfirmShow: PropTypes.bool.isRequired
+  };
 
   hideConfirm = () => {
     const { showConfirm } = this.props;
