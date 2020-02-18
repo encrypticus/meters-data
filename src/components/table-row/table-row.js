@@ -9,31 +9,18 @@ const TableRow = (props) => {
     value,
     date,
     id,
-    saveRecordID,
-    changeValue
+    saveRecordID
   } = props;
-
-  const changeCurrentValue = () => {
-    let value = prompt('Ввести значение');
-
-    if (!value) return;
-
-    value = value.trim();
-
-    if (value === '') return;
-
-    changeValue(id, value);
-  };
 
   return (
     <tr>
       <td>{tpNumber}</td>
       <td>{countNumber}</td>
-      <td className="value-col" onClick={changeCurrentValue}>{value}</td>
+      <td className="value-col" onClick={() => saveRecordID(id, 'prompt')}>{value}</td>
       <td>{date}</td>
       <td>
         <button
-          onClick={() => saveRecordID(id)}
+          onClick={() => saveRecordID(id, 'confirm')}
           className="btn btn-outline-info">
           <span className="fa fa-trash"></span>
         </button>
@@ -48,8 +35,7 @@ TableRow.propTypes = {
   value: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
-  saveRecordID: PropTypes.func.isRequired,
-  changeValue: PropTypes.func.isRequired
+  saveRecordID: PropTypes.func.isRequired
 };
 
 export default TableRow;
