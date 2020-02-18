@@ -1,6 +1,8 @@
 const initialState = {
   isConfirmShow: false,
-  recordID: ''
+  isPromptShow: false,
+  recordID: '',
+  insertedValue: ''
 };
 
 const modal = (state = initialState, action) => {
@@ -14,8 +16,21 @@ const modal = (state = initialState, action) => {
 
     case 'SAVE_RECORD_ID':
       return {
+        ...state,
         isConfirmShow: false,
         recordID: action.payload
+      };
+
+    case 'SHOW_PROMPT':
+      return {
+        ...state,
+        isPromptShow: action.payload
+      };
+
+    case 'INSERT_VALUE':
+      return {
+        ...state,
+        insertedValue: action.payload
       };
 
     default:
