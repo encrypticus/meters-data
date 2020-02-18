@@ -26,7 +26,6 @@ const DataTable = (props) => {
           date={date}
           id={id}
           saveRecordID={saveRecordID}
-          changeValue={changeValue}
         />
       );
 
