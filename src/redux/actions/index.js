@@ -24,10 +24,24 @@ const showConfirm = (show) => {
   };
 };
 
+const showPrompt = (show) => {
+  return {
+    type: 'SHOW_PROMPT',
+    payload: show
+  };
+};
+
 const saveRecordID = (recordID) => {
   return {
     type: 'SAVE_RECORD_ID',
     payload: recordID
+  };
+};
+
+const insertValue = (value) => {
+  return {
+    type: 'INSERT_VALUE',
+    payload: value
   };
 };
 
@@ -58,6 +72,7 @@ const changeValue = (dispatch, dataService) => (id, value) => {
     .then(() => {
       dataService.getMetersData()
         .then(data => dispatch(dataLoaded(data)))
+        .then(() => dispatch(insertValue('')))
         .catch(() => dispatch(emmitError()));
     })
     .catch(() => dispatch(emmitError()));
@@ -81,5 +96,7 @@ export {
   changeValue,
   addStation,
   showConfirm,
-  saveRecordID
+  showPrompt,
+  saveRecordID,
+  insertValue
 };
