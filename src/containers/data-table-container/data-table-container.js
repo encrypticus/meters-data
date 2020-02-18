@@ -3,12 +3,13 @@ import {connect} from 'react-redux';
 import {compose} from '$utils';
 import withDataService from '$c/hoc';
 import DataTable from '$c/data-table';
-import {fetchMetersData, deleteRow, changeValue, showConfirm, saveRecordID} from '$actions';
+import {fetchMetersData, deleteRow, changeValue, showConfirm, showPrompt, saveRecordID} from '$actions';
 import Spinner from '$c/spinner';
 import ErrorIndicator from '$c/error-indicator';
 import PropTypes from 'prop-types';
 import DataService from '../../services/dataService';
 import ConfirmWindow from '$c/modal-windows/confirm-window';
+import PromptWindow from '$c/modal-windows/prompt-window';
 
 class DataTableContainer extends React.Component {
 
@@ -22,7 +23,9 @@ class DataTableContainer extends React.Component {
     changeValue: PropTypes.func.isRequired,
     recordID: PropTypes.string.isRequired,
     saveRecordID: PropTypes.func.isRequired,
-    showConfirm: PropTypes.func.isRequired
+    showConfirm: PropTypes.func.isRequired,
+    showPrompt: PropTypes.func.isRequired,
+    insertedValue: PropTypes.string.isRequired
   };
 
   componentDidMount() {
@@ -37,11 +40,29 @@ class DataTableContainer extends React.Component {
     showConfirm(false);
   };
 
-  saveRecordID = (recordID) => {
-    const { saveRecordID, showConfirm } = this.props;
+  hidePrompt = () => {
+    const { showPrompt } = this.props;
+
+    showPrompt(false);
+  };
+
+  saveRecordID = (recordID, modalType) => {
+    const { saveRecordID, showConfirm, showPrompt } = this.props;
 
     saveRecordID(recordID);
-    showConfirm(true);
+
+    switch (modalType) {
+      case 'confirm':
+        showConfirm(true);
+      break;
+
+      case 'prompt':
+        showPrompt(true);
+      break;
+
+      default:
+        showConfirm(true);
+    }
   };
 
   deleteRow = () => {
@@ -51,10 +72,14 @@ class DataTableContainer extends React.Component {
     deleteRow(recordID);
   };
 
-  changeValue = (id, value) => {
-    const { changeValue } = this.props;
+  changeValue = () => {
+    const { changeValue, recordID, insertedValue } = this.props;
 
-    changeValue(id, value);
+    this.hidePrompt();
+
+    if (insertedValue === '') return;
+
+    changeValue(recordID, insertedValue);
   };
 
   render() {
@@ -76,9 +101,8 @@ class DataTableContainer extends React.Component {
           changeValue={this.changeValue}
           saveRecordID={this.saveRecordID}
         />
-        <ConfirmWindow
-          deleteRow={this.deleteRow}
-        />
+        <ConfirmWindow deleteRow={this.deleteRow}/>
+        <PromptWindow changeValue={this.changeValue}/>
       </>
     );
   }
@@ -89,7 +113,8 @@ function mapStateToProps(state) {
     isLoading: state.metersData.isLoading,
     hasError: state.metersData.hasError,
     data: state.metersData.data,
-    recordID: state.modal.recordID
+    recordID: state.modal.recordID,
+    insertedValue: state.modal.insertedValue
   };
 }
 
@@ -101,6 +126,7 @@ function mapDispatchToProps(dispatch, ownProps) {
     deleteRow: deleteRow(dispatch, dataService),
     changeValue: changeValue(dispatch, dataService),
     showConfirm: (show) => dispatch(showConfirm(show)),
+    showPrompt: (show) => dispatch(showPrompt(show)),
     saveRecordID: (recordID) => dispatch(saveRecordID(recordID))
   };
 }
